@@ -58,3 +58,7 @@ The numerical thresholds in `tests/` (state errors `1e-8`, residual and energy-b
 ## History
 
 The public repository starts from the consolidated KT3 baseline.
+
+## License
+
+This project is released under the MIT License. See [LICENSE](LICENSE).
