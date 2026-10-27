@@ -1,0 +1,29 @@
+# --- Private, local-only material (has its own separate Git repository; never published) ---
+/private/
+/AGENTS.md
+/CLAUDE.md
+
+# --- Safety net: office/PDF documents are never tracked by accident (use `git add -f` deliberately) ---
+*.pdf
+*.docx
+*.doc
+*.pptx
+~$*
+
+# --- Python / tooling ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# --- Editor / OS / agent tooling ---
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db

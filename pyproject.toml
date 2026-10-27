@@ -1,0 +1,17 @@
+[project]
+name = "m2-robot-vkr"
+version = "0.0.2"
+description = "Modelling of a nonholonomic wheeled mobile robot (M2 research practice / VKR)"
+requires-python = ">=3.11"
+dependencies = ["numpy", "scipy", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["pytest", "sympy"]
+notebook = ["jupyter", "pandas", "sympy"]
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
