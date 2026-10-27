@@ -57,4 +57,4 @@ The numerical thresholds in `tests/` (state errors `1e-8`, residual and energy-b
 
 ## History
 
-The residual-drift tolerance calibration studies and the earlier modular layout are kept in the git tag `kt3-baseline-v1`; they are not part of the main path.
+The public repository starts from the consolidated KT3 baseline.
