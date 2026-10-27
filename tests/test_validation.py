@@ -1,8 +1,4 @@
-"""Validation against independent oracles (closed forms, quadrature, energy) and solver behaviour.
-Numerical thresholds are technical software-validation thresholds, not physical tolerances (not validated by the
-supervisor). They exceed by at least a factor 40 the errors observed with DOP853, rtol=1e-12, atol=1e-14
-(states <= 4e-11, energy balance <= 2.3e-10 including the Simpson error); see README, 'Test tolerances'.
-"""
+"""Validation tests: closed forms, quadrature, energy balance and solver behaviour."""
 
 import math
 

@@ -1,6 +1,5 @@
-"""Target states T_i = X(t_i) sampled from a simulated trajectory; CSV + JSON export and reload.
+"""Target states T_i = X(t_i) from a simulated trajectory; CSV + JSON export and reload.
 
-All data are simulation outputs of a provisional model, not measurements of a physical robot.
 Numbers are written with repr() precision, so save/load is bit-exact. A directory is never overwritten.
 """
 

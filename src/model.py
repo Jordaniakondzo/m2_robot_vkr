@@ -1,16 +1,9 @@
-"""Baseline v1: planar rigid body with a no-lateral-slip constraint (provisional model).
+"""Baseline v1: planar rigid-body model with a no-lateral-slip constraint.
 
-Full state  X = (x, y, theta, vx, vy, omega)   [m, m, rad, m/s, m/s, rad/s]
-Reduced     Z = (x, y, theta, v, omega),  v = vx cos(theta) + vy sin(theta)   (verification only)
-Inputs      F [N] (body-axis force), tau [N m] (yaw torque); parameters m [kg], J [kg m^2].
-Constraint  r(X) = vx sin(theta) - vy cos(theta) = 0.
-
-    x'' = F/m cos(theta) - v omega sin(theta)
-    y'' = F/m sin(theta) + v omega cos(theta)
-    theta'' = tau / J
-
-Derivation, assumptions and checks: notebooks/01_model_and_validation.ipynb.
-Arrays have the component index on axis 0 (trajectory shape (n, N_times), as in solve_ivp).
+State X = (x, y, theta, vx, vy, omega) [m, m, rad, m/s, m/s, rad/s]; reduced Z = (x, y, theta, v, omega) is for verification only.
+Inputs F [N] (body-axis force), tau [N m] (yaw torque); parameters m [kg], J [kg m^2].
+Constraint r(X) = vx sin(theta) - vy cos(theta) = 0. Derivation: notebooks/01_model_and_validation.ipynb.
+Trajectories have the component index on axis 0, shape (n, N_times), as in solve_ivp.
 """
 
 from __future__ import annotations

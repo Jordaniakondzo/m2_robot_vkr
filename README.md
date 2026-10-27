@@ -2,7 +2,7 @@
 
 Research code for a Master's research internship (Applied Informatics) and the subsequent thesis. Practice topic: «Моделирование движения колесного мобильного робота по заданным точкам траектории».
 
-**Status.** KT3 baseline. The model (*Baseline v1*) is **provisional**: it has not been validated by the supervisor and is not a wheel-drive or Ackermann model. All parameters are synthetic and all results are simulation outputs, not measurements of a physical robot. Neural control is a later stage and is not implemented.
+**Status.** KT3 baseline. *Baseline v1* is the current dynamic model used for the M2 practice stage: three second-order ODEs, full state $X=(x,y,\theta,v_x,v_y,\omega)$, nonholonomic constraint $r(X)=v_x\sin\theta-v_y\cos\theta=0$, numerical integration, planar simulation and six-component target states $T_i=X(t_i)$ (the supervisor's minimum for the practice: theory plus simulation of a wheeled robot on a plane). It may be further refined, particularly regarding numerical preservation of the nonholonomic constraint (an Erugin–Galiullin-type construction is to be studied; not yet validated). It is not a wheel-drive or Ackermann model. All parameters are synthetic and all results are simulation outputs, not measurements of a physical robot. Neural control (e.g. $\dot\phi$ as output) belongs to the later thesis stage and is out of the current scope.
 
 ## Model
 

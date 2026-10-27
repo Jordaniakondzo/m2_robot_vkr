@@ -1,12 +1,8 @@
-"""KT3 experiment: three scenarios -> trajectories -> target states T_i = X(t_i) -> diagnostics -> figures.
+"""KT3 experiment: scenarios -> trajectories -> target states T_i = X(t_i) -> diagnostics -> figures.
 
     python -m experiments.run_kt3 [--out-root results]
 
-Output: <out-root>/kt3_<UTC>/{targets.csv, metadata.json, paths.png, speeds.png, residuals.png}
-(new directory, never overwritten). Synthetic parameters; the model is provisional.
-
-S1 straight line and S2 circular arc (F = tau = 0) have closed forms (independent reference).
-S3 has constant F and tau, so v and omega vary linearly in time; its reference is the 5-state model.
+Writes <out-root>/kt3_<UTC>/ as a new directory; existing results are never overwritten.
 """
 
 from __future__ import annotations
@@ -58,7 +54,7 @@ def main(out_root="results") -> Path:
     runs = {name: run_scenario(name, *rest) for name, *rest in SCENARIOS}
     out = Path(out_root) / f"kt3_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
     save_targets([r["set"] for r in runs.values()], out, metadata={
-        "model": "Baseline v1 (provisional), X = (x, y, theta, vx, vy, omega), r = vx sin(theta) - vy cos(theta)",
+        "model": "Baseline v1 (M2 practice model), X = (x, y, theta, vx, vy, omega), r = vx sin(theta) - vy cos(theta)",
         "command": "python -m experiments.run_kt3", "units": UNITS,
         "note": "synthetic simulation output; not a measurement of a physical robot"})
     plot_paths(runs, out / "paths.png")

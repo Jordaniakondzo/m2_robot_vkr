@@ -1,8 +1,4 @@
-"""Model: shapes, input checks, analytic identities of the constraint, full vs reduced equivalence.
-Numerical thresholds are technical software-validation thresholds, not physical tolerances (not validated by the
-supervisor). They exceed by at least a factor 40 the errors observed with DOP853, rtol=1e-12, atol=1e-14
-(states <= 4e-11, energy balance <= 2.3e-10 including the Simpson error); see README, 'Test tolerances'.
-"""
+"""Model tests: shapes, input checks, constraint identities, full vs reduced equivalence."""
 
 import numpy as np
 import pytest
