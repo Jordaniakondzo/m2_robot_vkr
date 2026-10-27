@@ -59,6 +59,8 @@ The numerical thresholds in `tests/` (state errors `1e-8`, residual and energy-b
 
 The public repository starts from the consolidated KT3 baseline.
 
+The reference dataset `results/kt3_20261027T073745Z/` retains the historical label "Baseline v1 (provisional)" because it records the exact metadata at generation time. The scientific status of Baseline v1 was later clarified as the current M2 practice model, without changing the equations, scenarios or reference results.
+
 ## License
 
 This project is released under the MIT License. See [LICENSE](LICENSE).
