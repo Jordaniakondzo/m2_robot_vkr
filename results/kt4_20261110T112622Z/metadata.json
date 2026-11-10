@@ -1,0 +1,167 @@
+{
+  "created_utc": "20261110T112622Z",
+  "columns": [
+    "trajectory_id",
+    "t",
+    "x",
+    "y",
+    "theta",
+    "vx",
+    "vy",
+    "omega",
+    "r",
+    "F",
+    "tau"
+  ],
+  "units": {
+    "t": "s",
+    "x": "m",
+    "y": "m",
+    "theta": "rad",
+    "vx": "m/s",
+    "vy": "m/s",
+    "omega": "rad/s",
+    "r": "m/s",
+    "F": "N",
+    "tau": "N*m"
+  },
+  "code": {
+    "commit": "ec60012bc762cad0c5151bf0164ec6c71b8b99aa",
+    "dirty": false
+  },
+  "software": {
+    "python_version": "3.13.9",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.16.3"
+  },
+  "dataset": {
+    "experiment": "KT4 working planar simulation",
+    "model": "Baseline v1 (M2 practice model), X = (x, y, theta, vx, vy, omega), r = vx sin(theta) - vy cos(theta)",
+    "command": "python -m experiments.run_kt4 --save-animation",
+    "units": {
+      "t": "s",
+      "x": "m",
+      "y": "m",
+      "theta": "rad",
+      "vx": "m/s",
+      "vy": "m/s",
+      "omega": "rad/s",
+      "r": "m/s",
+      "F": "N",
+      "tau": "N*m"
+    },
+    "note": "synthetic simulation output; not a measurement of a physical robot"
+  },
+  "trajectories": {
+    "S1_line": {
+      "params": {
+        "m": 10.0,
+        "J": 2.0
+      },
+      "initial_state_X0": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "control": {
+        "kind": "constant",
+        "F": 0.0,
+        "tau": 0.0
+      },
+      "solver": {
+        "method": "DOP853",
+        "rtol": 1e-10,
+        "atol": 1e-12
+      },
+      "t_targets": [
+        2.0,
+        4.0,
+        6.0,
+        8.0,
+        10.0
+      ],
+      "diagnostics": {
+        "max_abs_r_dense": 0.0,
+        "max_drift_dense": 0.0,
+        "max_state_diff_vs_5state_model": 1.7763568394002505e-15,
+        "max_state_error_vs_closed_form": 7.105427357601002e-15
+      }
+    },
+    "S2_arc": {
+      "params": {
+        "m": 10.0,
+        "J": 2.0
+      },
+      "initial_state_X0": [
+        0.0,
+        0.0,
+        0.0,
+        1.5,
+        0.0,
+        0.6
+      ],
+      "control": {
+        "kind": "constant",
+        "F": 0.0,
+        "tau": 0.0
+      },
+      "solver": {
+        "method": "DOP853",
+        "rtol": 1e-10,
+        "atol": 1e-12
+      },
+      "t_targets": [
+        2.0,
+        4.0,
+        6.0,
+        8.0,
+        10.0
+      ],
+      "diagnostics": {
+        "max_abs_r_dense": 2.885945926678346e-10,
+        "max_drift_dense": 2.885945926678346e-10,
+        "max_state_diff_vs_5state_model": 1.841048757889041e-09,
+        "max_state_error_vs_closed_form": 1.8719314986981317e-09
+      }
+    },
+    "S3_const_F_tau": {
+      "params": {
+        "m": 10.0,
+        "J": 2.0
+      },
+      "initial_state_X0": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.3
+      ],
+      "control": {
+        "kind": "constant",
+        "F": 2.0,
+        "tau": 0.2
+      },
+      "solver": {
+        "method": "DOP853",
+        "rtol": 1e-10,
+        "atol": 1e-12
+      },
+      "t_targets": [
+        2.0,
+        4.0,
+        6.0,
+        8.0,
+        10.0
+      ],
+      "diagnostics": {
+        "max_abs_r_dense": 1.5943679709806702e-09,
+        "max_drift_dense": 1.5943679709806702e-09,
+        "max_state_diff_vs_5state_model": 5.793112656249377e-09
+      }
+    }
+  }
+}
