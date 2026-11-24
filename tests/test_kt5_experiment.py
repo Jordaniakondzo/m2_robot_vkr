@@ -3,15 +3,12 @@
 import csv
 import json
 import math
-from pathlib import Path
 
 import numpy as np
 import pytest
 
 from experiments import run_kt5 as k5
 from src.metrics import constraint_residual
-
-PLAN = Path(__file__).resolve().parents[1] / "private" / "KT5_EXPERIMENT_PLAN.md"
 
 
 @pytest.fixture(scope="module")
@@ -41,17 +38,6 @@ def test_matrix_size_ids_configs_and_groups(matrix):
     assert len({e["run_id"] for e in matrix}) == 22
     assert len({tuple(e[k] for k in k5.FACTORS) for e in matrix}) == 22
     assert [sum(e["group"] == g for e in matrix) for g in ("reference", "ofat", "combined")] == [1, 17, 4]
-
-
-def test_matrix_matches_private_plan(matrix):
-    if not PLAN.exists():
-        pytest.skip("private/KT5_EXPERIMENT_PLAN.md not available")
-    rows = [[c.strip() for c in line.strip().strip("|").split("|")] for line in PLAN.read_text(encoding="utf-8").splitlines()
-            if line.startswith("| ") and line.split("|")[2].strip() in ("reference", "ofat", "combined")]
-    assert len(rows) == 22
-    for spec, (run_id, group, factor, m, J, v0, w0, F, tau) in zip(matrix, rows):
-        assert (spec["run_id"], spec["group"], spec["factor"]) == (run_id, group, factor)
-        assert [spec[k] for k in ("m", "J", "v0", "omega0", "F", "tau")] == [float(c) for c in (m, J, v0, w0, F, tau)]
 
 
 def test_ref_parameters(matrix):

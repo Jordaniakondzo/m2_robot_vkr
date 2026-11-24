@@ -2,8 +2,8 @@
 
     python -m experiments.run_kt5 [--out-root results]
 
-The matrix follows private/KT5_EXPERIMENT_PLAN.md and is not configurable. Writes <out-root>/kt5_<UTC>/
-as a new directory; existing results are never overwritten. Collection only: no analysis or verdicts.
+Reproducible KT5 parameter-sensitivity and data-collection campaign; the run matrix is fixed, not configurable.
+Writes <out-root>/kt5_<UTC>/ as a new directory; existing results are never overwritten. Collection only: no analysis or verdicts.
 """
 
 from __future__ import annotations
