@@ -4,6 +4,8 @@ Research code for a Master's research internship (Applied Informatics) and the s
 
 **Status.** KT4 working simulation available (built on the KT3 baseline). *Baseline v1* is the current dynamic model used for the M2 practice stage: three second-order ODEs, full state $X=(x,y,\theta,v_x,v_y,\omega)$, nonholonomic constraint $r(X)=v_x\sin\theta-v_y\cos\theta=0$, numerical integration, planar simulation and six-component target states $T_i=X(t_i)$ (the supervisor's minimum for the practice: theory plus simulation of a wheeled robot on a plane). It may be further refined, particularly regarding numerical preservation of the nonholonomic constraint (an Erugin–Galiullin-type construction is to be studied; not yet validated). It is not a wheel-drive or Ackermann model. All parameters are synthetic and all results are simulation outputs, not measurements of a physical robot. Neural control (e.g. $\dot\phi$ as output) belongs to the later thesis stage and is out of the current scope. The simulation integrates the model under constant inputs $F,\tau$; no feedback or target-reaching control law is implemented, so reaching prescribed target states remains an open later problem.
 
+KT5 parameter-sensitivity and data-collection campaign is available. It records synthetic trajectories and diagnostics for later analysis; the detailed comparative analysis belongs to KT6.
+
 ## Model
 
 Planar rigid body with an ideal no-lateral-slip constraint. State $X=(x,y,\theta,\dot x,\dot y,\dot\theta)\in\mathbb R^6$, inputs $F$ [N] (longitudinal force) and $\tau$ [N m] (yaw torque), parameters $m$ [kg], $J$ [kg m²]. With $v=\dot x\cos\theta+\dot y\sin\theta$ and $\omega=\dot\theta$:
@@ -23,9 +25,11 @@ src/plots.py        paths, speeds, residual drift; robot pose geometry, planar-m
 experiments/scenarios.py  scenario definitions, parameters, solver settings and runner shared by KT3 and KT4
 experiments/run_kt3.py   the three KT3 scenarios -> targets, diagnostics, figures
 experiments/run_kt4.py   KT4 working simulation -> planar-motion figures, diagnostics, optional animation
+experiments/run_kt5.py   KT5 fixed parameter campaign -> run settings, trajectories, metrics
 notebooks/01_model_and_validation.ipynb   derivation, symbolic check, validation
 tests/              model identities, independent validation, dataset round trip, visualization checks
-results/            reference runs: kt3_<UTC>/ and kt4_<UTC>/ (timestamped; never overwritten)
+tests/test_kt5_experiment.py   KT5 campaign matrix, outputs and reproducibility checks
+results/            reference runs: kt3_<UTC>/, kt4_<UTC>/ and kt5_<UTC>/ (timestamped; never overwritten)
 ```
 
 ## Scenarios (KT3, reused in KT4)
@@ -50,6 +54,7 @@ pytest
 python -m experiments.run_kt3          # writes results/kt3_<UTC>/
 python -m experiments.run_kt4          # writes results/kt4_<UTC>/
 python -m experiments.run_kt4 --save-animation   # additionally writes S2_arc_animation.gif
+python -m experiments.run_kt5          # writes results/kt5_<UTC>/
 pip install -e ".[notebook]"           # to run the notebook
 ```
 
@@ -67,6 +72,12 @@ Each run records parameters, initial state, solver and tolerances, git commit an
 - `S2_arc_animation.gif` (only with `--save-animation`): animation of the S2_arc pose along the simulated trajectory.
 
 All outputs are synthetic simulation results.
+
+## KT5 campaign
+
+`python -m experiments.run_kt5` runs the fixed matrix in `experiments/run_kt5.py` and writes a new `results/kt5_<UTC>/` directory (reference run: `results/kt5_20261124T044515Z/`). It comprises 22 simulations: one reference, 17 one-factor-at-a-time (OFAT) variations and four combined $F,\tau$ cases. DOP853 uses `rtol=1e-10`, `atol=1e-12` over $t\in[0,10]$ s, with 201 points per run (4,422 trajectory rows).
+
+The reference directory contains `experiment_runs.csv` (parameters and run settings), `trajectories.csv` (states and constraint residual), `metrics.csv` (final-state, path, constraint and analytic-check metrics) and `metadata.json` (configuration and provenance). These are synthetic simulation data for subsequent sensitivity analysis, not measurements of a physical robot or conclusions about which parameters are most influential.
 
 ## Test tolerances
 
